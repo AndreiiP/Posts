@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "checkJs": true,
+    "module": "ESNext",
+    "types": ["vite/client"],
+    "moduleResolution": "Node"
+  },
+  "exclude": ["node_modules", "build"]
+}

@@ -1,0 +1,19 @@
+.post-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Высота вьюпорта (полная высота экрана) */
+  max-width: 100%; /* Максимальная ширина */
+  max-height: 80vh; /* Максимальная высота */
+  margin: 0 auto; /* Центрирование на странице */
+}
+
+.post-image-edit {
+  max-width: 100%; /* Максимальная ширина изображения */
+  max-height: 100%; /* Максимальная высота изображения */
+}
+
+.post-info-edit {
+  text-align: center; /* Выравнивание текста по центру */
+  padding: 20px;
+}

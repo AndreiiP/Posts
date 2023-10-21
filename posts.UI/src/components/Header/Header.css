@@ -1,0 +1,75 @@
+/* header */
+.header {
+  background-color: #fff;
+  box-shadow: inset 0 -1px 0 #ededed;
+  margin: 0;
+  padding: 20px 24px;
+}
+.header .main-header-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.burger-logo-block {
+  display: flex;
+}
+.header .main-header-row .menu-desktop {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.header .main-header-row .right-buttons-block {
+  align-items: center;
+  display: flex;
+}
+
+.menu-item {
+  padding-right: 10px;
+}
+
+.container.l {
+  max-width: 1352px;
+}
+
+.header .main-header-row .menu-desktop .menu-item {
+  color: #222d22;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0 28px;
+  text-decoration: none;
+}
+
+.header .main-header-row .right-buttons-block .account {
+  background: #fafafa;
+  border: 1px solid #fafafa;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  margin-left: 16px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  width: 40px;
+}
+.header .main-header-row .right-buttons-block .account .ac-icon {
+  background-image: url("/account_icon.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.logo {
+  background-image: url("/vite.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 32px;
+  width: 124px;
+}
