@@ -4,7 +4,6 @@ namespace postsWebApi.Dtos.Post
     {
         [Required]
         public string Title { get; set; } = null!;
-
         [Required]
         public string Body { get; set; } = null!;
     }
