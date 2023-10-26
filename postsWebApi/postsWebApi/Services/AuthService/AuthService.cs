@@ -18,7 +18,8 @@ namespace postsWebApi.Services.AuthService
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
             var response = new ServiceResponse<int>();
-            if (await UserExists(user.Username))
+            
+            if (await UserExists(user.Email))
             {
                 response.Success = false;
                 response.Message = "User already exists.";
@@ -45,9 +46,9 @@ namespace postsWebApi.Services.AuthService
             }
         }
 
-        public async Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string email)
         {
-            if (await _context.Users.AnyAsync(u => u.Username.ToLower() == username.ToLower()))
+            if (await _context.Users.AnyAsync(u => u.Email.ToLower() == email.ToLower()))
             {
                 return true;
             }
@@ -92,7 +93,8 @@ namespace postsWebApi.Services.AuthService
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
@@ -108,6 +110,8 @@ namespace postsWebApi.Services.AuthService
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
+                Issuer = _configuration.GetSection("JwtSettings:Issuer").Value,
+                Audience = _configuration.GetSection("JwtSettings:Audience").Value,
                 SigningCredentials = creds
             };
 

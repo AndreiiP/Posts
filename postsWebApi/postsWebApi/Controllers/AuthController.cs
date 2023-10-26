@@ -38,11 +38,5 @@ namespace postsWebApi.Controllers
             }
             return Ok(response);
         }
-
-
-
-
-
-
     }
 }

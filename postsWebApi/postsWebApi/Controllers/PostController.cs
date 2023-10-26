@@ -15,6 +15,7 @@ namespace postsWebApi.Controllers
             _postService = postService;
         }
 
+        [Authorize]
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetPostDto>>>> Get() 
         {
