@@ -1,12 +1,15 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using postsWebApi.Services.PostService;
 global using postsWebApi.Dtos.Post;
+global using postsWebApi.Dtos.Comment;
+global using postsWebApi.Dtos.User;
 global using postsWebApi.Data;
 global using postsWebApi.Services.AuthService;
 global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Authorization;
 global using System.Text;
 global using static postsWebApi.Utility.VarDump;
+global using postsWebApi.Services.CommentService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -78,12 +81,13 @@ builder.Services.AddAuthorization();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 
 builder.Services.AddCors(options => 
     {
         options.AddPolicy("CorsPolicy", builder => 
         {
-            builder.WithOrigins("http://localhost:5173")
+            builder.WithOrigins("http://localhost:5174")
             .AllowAnyMethod()
             .AllowAnyHeader();
         });

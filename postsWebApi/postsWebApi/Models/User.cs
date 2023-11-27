@@ -9,5 +9,6 @@ namespace postsWebApi.Models
         public string Email { get; set; } = null!;
         public byte[] PasswordHash { get; set; } = new byte[0];
         public byte[] PasswordSalt { get; set; } = new byte[0];
+        public ICollection<Comment>? Comments { get; set; }
     }
 }

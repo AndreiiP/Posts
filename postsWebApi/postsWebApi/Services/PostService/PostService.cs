@@ -15,30 +15,34 @@ namespace postsWebApi.Services.PostService
             _context = context;
         }
     
-        public async Task<ServiceResponse<List<GetPostDto>>> AddPost(AddPostDto newPost)
+        public async Task<ServiceResponse<List<PostDto>>> AddPost(AddPostDto newPost)
         {
-            var serviceResponse = new ServiceResponse<List<GetPostDto>>();
+            var serviceResponse = new ServiceResponse<List<PostDto>>();
             var post = _mapper.Map<Post>(newPost);
 
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 
-            serviceResponse.Data = await _context.Posts.Select(p => _mapper.Map<GetPostDto>(p)).ToListAsync();
+            serviceResponse.Data = await _context.Posts.Select(p => _mapper.Map<PostDto>(p)).ToListAsync();
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetPostDto>>> GetAllPosts()
+        public async Task<ServiceResponse<List<PostDto>>> GetAllPosts()
         {
-            var serviceResponse = new ServiceResponse<List<GetPostDto>>();
+            var serviceResponse = new ServiceResponse<List<PostDto>>();
             var posts = await _context.Posts.ToListAsync();
-            serviceResponse.Data = posts.Select(p => _mapper.Map<GetPostDto>(p)).ToList();
+            serviceResponse.Data = posts.Select(p => _mapper.Map<PostDto>(p)).ToList();
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetPostDto>> GetPostById(int id)
         {
             var serviceResponse = new ServiceResponse<GetPostDto>();
-            var posts = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
+            var posts = await _context.Posts
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(p => p.Id == id);
+                
             serviceResponse.Data = _mapper.Map<GetPostDto>(posts);
             return serviceResponse;
         }
@@ -71,9 +75,9 @@ namespace postsWebApi.Services.PostService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetPostDto>>> DeletePost(int id)
+        public async Task<ServiceResponse<List<PostDto>>> DeletePost(int id)
         {
-            var serviceResponse = new ServiceResponse<List<GetPostDto>>();
+            var serviceResponse = new ServiceResponse<List<PostDto>>();
             var post = await _context.Posts.FirstOrDefaultAsync(p => p.Id == id);
 
             try {
@@ -84,7 +88,7 @@ namespace postsWebApi.Services.PostService
                 _context.Posts.Remove(post);
                 await _context.SaveChangesAsync(); 
 
-                serviceResponse.Data = _context.Posts.Select(c => _mapper.Map<GetPostDto>(c)).ToList();
+                serviceResponse.Data = _context.Posts.Select(c => _mapper.Map<PostDto>(c)).ToList();
 
             } catch (Exception ex) 
             {

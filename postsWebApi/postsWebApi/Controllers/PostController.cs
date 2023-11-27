@@ -15,9 +15,8 @@ namespace postsWebApi.Controllers
             _postService = postService;
         }
 
-        [Authorize]
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<List<GetPostDto>>>> Get() 
+        public async Task<ActionResult<ServiceResponse<List<PostDto>>>> Get() 
         {
             return Ok(await _postService.GetAllPosts());
         }
@@ -29,7 +28,7 @@ namespace postsWebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetPostDto>>>> AddPost(AddPostDto newPost) 
+        public async Task<ActionResult<ServiceResponse<List<PostDto>>>> AddPost(AddPostDto newPost) 
         {
             return Ok(await _postService.AddPost(newPost));
         }
@@ -46,7 +45,7 @@ namespace postsWebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ServiceResponse<GetPostDto>>> DeletePost(int id) 
+        public async Task<ActionResult<ServiceResponse<PostDto>>> DeletePost(int id) 
         {
             var response = await _postService.DeletePost(id);
 

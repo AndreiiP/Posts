@@ -7,5 +7,7 @@ namespace postsWebApi.Models
         public string Title { get; set; } = null!;
         [Required]
         public string Body { get; set; } = null!;
+
+        public ICollection<Comment> Comments { get; set; } = null!;
     }
 }
