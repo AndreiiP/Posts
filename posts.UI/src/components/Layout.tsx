@@ -1,8 +1,9 @@
+import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Header/Header.css";
 import "./Main/Main.css";
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <>
       <header className="header">

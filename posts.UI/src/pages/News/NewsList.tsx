@@ -1,6 +1,7 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
-const NewsList = () => {
+const NewsList: React.FC = () => {
   return (
     <div className="post-list">
       <div className="post-item">

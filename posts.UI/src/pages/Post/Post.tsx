@@ -1,7 +1,15 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
-const Post = ({ post }) => {
+interface PostProps {
+  post: {
+    id: number;
+    title: string;
+    commentCount: number;
+  };
+}
+
+const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="post-item">
       <Link to={`/post/${post.id}`} className="post-a-image">
@@ -21,14 +29,6 @@ const Post = ({ post }) => {
       </div>
     </div>
   );
-};
-
-Post.propTypes = {
-  post: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    commentCount: PropTypes.number.isRequired,
-  }).isRequired,
 };
 
 export default Post;

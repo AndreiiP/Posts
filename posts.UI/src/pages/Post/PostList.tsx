@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import postService from "../../services/postService";
 import "./styles/PostList.css";
 import Post from "./Post";
 
-const PostList = () => {
-  const [posts, setPosts] = useState([]);
+interface PostData {
+  id: number;
+  title: string;
+  commentCount: number;
+}
+
+const PostList: React.FC = () => {
+const [posts, setPosts] = useState<PostData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,9 +1,16 @@
 import axios from "axios";
 
-const API_URL = `${import.meta.env.VITE_APP_API_DOMAIN}/api/Post`;
+const API_URL: string = `${import.meta.env.VITE_APP_API_DOMAIN}/api/Post`;
+
+interface PostData {
+  id: number;
+  title: string;
+  body: string;
+  commentCount: number;
+}
 
 const postService = {
-  getAllPosts: async () => {
+  getAllPosts: async (): Promise<PostData[]> => {
     try {
       const response = await axios.get(`${API_URL}/GetAll`);
       return response.data.data;
@@ -12,7 +19,7 @@ const postService = {
       throw error;
     }
   },
-  getPostById: async (postId) => {
+  getPostById: async (postId: number): Promise<PostData> => {
     try {
       const response = await axios.get(`${API_URL}/${postId}`);
       return response.data.data;

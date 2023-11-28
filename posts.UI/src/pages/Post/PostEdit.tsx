@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import postService from "../../services/postService";
 import { useParams } from "react-router-dom";
 import "./styles/PostEdit.css";
 
-const PostEdit = () => {
-  const { postId } = useParams();
+interface PostData {
+  title: string;
+  body: string;
+}
 
-  const [post, setPost] = useState({ title: "", body: "" });
+const PostEdit: React.FC = () => {
+  const { postId } = useParams<{ postId: string }>();
+  const [post, setPost] = useState<PostData>({ title: "", body: "" });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postData = await postService.getPostById(postId);
+        const postData = await postService.getPostById(Number(postId));
         console.log(postData);
         setPost(postData);
       } catch (error) {
