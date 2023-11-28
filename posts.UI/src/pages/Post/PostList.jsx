@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import "./PostList.css";
+import postService from "../../services/postService";
+import "./styles/PostList.css";
 import Post from "./Post";
 
 const PostList = () => {
@@ -9,11 +9,9 @@ const PostList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_DOMAIN}/api/Post/GetAll`
-        );
-        console.log(response.data.data);
-        setPosts(response.data.data);
+        const postsData = await postService.getAllPosts();
+        console.log(postsData);
+        setPosts(postsData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import postService from "../../services/postService";
 import { useParams } from "react-router-dom";
-import "./PostEdit.css";
+import "./styles/PostEdit.css";
 
 const PostEdit = () => {
   const { postId } = useParams();
@@ -11,11 +11,9 @@ const PostEdit = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5230/api/Post/${postId}` 
-        );
-        console.log(response.data.data);
-        setPost(response.data.data);
+        const postData = await postService.getPostById(postId);
+        console.log(postData);
+        setPost(postData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

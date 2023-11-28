@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import PostList from "./components/Post/PostList";
-import "./css/App.css";
-import PostEdit from "./components/Post/PostEdit";
+import PostList from "./pages/Post/PostList";
+import "./assets/styles/App.css";
+import PostEdit from "./pages/Post/PostEdit";
 import Layout from "./components/Layout";
-import NewsList from "./components/News/NewsList";
+import NewsList from "./pages/News/NewsList";
 
 const App = () => {
   return (

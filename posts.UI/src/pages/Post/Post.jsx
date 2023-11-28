@@ -15,7 +15,7 @@ const Post = ({ post }) => {
             <div className="post-comments-icon">
               <span className="icon"></span>
             </div>
-            <div className="post-comments-count"></div>
+            <div className="post-comments-count">{post.commentCount}</div>
           </div>
         </div>
       </div>
@@ -27,6 +27,7 @@ Post.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
+    commentCount: PropTypes.number.isRequired,
   }).isRequired,
 };
 
