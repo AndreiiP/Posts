@@ -30,7 +30,8 @@ namespace postsWebApi.Services.PostService
         public async Task<ServiceResponse<List<PostDto>>> GetAllPosts()
         {
             var serviceResponse = new ServiceResponse<List<PostDto>>();
-            var posts = await _context.Posts.ToListAsync();
+            var posts = await _context.Posts.Include(p => p.Comments).ToListAsync();
+
             serviceResponse.Data = posts.Select(p => _mapper.Map<PostDto>(p)).ToList();
             return serviceResponse;
         }

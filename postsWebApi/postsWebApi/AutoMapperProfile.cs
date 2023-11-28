@@ -10,7 +10,8 @@ namespace postsWebApi
             CreateMap<Post, GetPostDto>();
             CreateMap<AddPostDto, Post>();
             CreateMap<AddCommentDto, Comment>();
-            CreateMap<Post, PostDto>();
+            CreateMap<Post, PostDto>()
+                .ForMember(dest => dest.CommentCount, opt => opt.MapFrom(src => src.Comments.Count));
             CreateMap<Comment, GetCommentDto>();
 
             CreateMap<Comment, GetCommentDto>()
