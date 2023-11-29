@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Header/Header.css";
 import "./Main/Main.css";
+import LoginPopup from "./LoginPopup";
 
 const Header: React.FC = () => {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const handleAccountClick = () => {
+    setPopupVisible(true);
+  };
+
   return (
     <>
       <header className="header">
@@ -25,9 +32,14 @@ const Header: React.FC = () => {
               </NavLink>
             </div>
             <div className="right-buttons-block">
-              <a className="account" href="#">
+              <div className="account" onClick={handleAccountClick}>
                 <span className="ac-icon"></span>
-              </a>
+              </div>
+              {isPopupVisible && (
+                <div className="modal-wrapper">
+                  <LoginPopup />
+                </div>
+              )}
             </div>
           </div>
         </div>

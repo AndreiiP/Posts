@@ -20,9 +20,9 @@ const Post: React.FC<PostProps> = ({ post }) => {
         <div className="post-meta">
           <div className="post-date">16.10.2023</div>
           <div className="post-comments">
-            <div className="post-comments-icon">
+            <a className="post-comments-icon" href={`/post/${post.id}`}>
               <span className="icon"></span>
-            </div>
+            </a>
             <div className="post-comments-count">{post.commentCount}</div>
           </div>
         </div>
