@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Header/Header.css";
 import "./Main/Main.css";
-import LoginPopup from "./LoginPopup";
+import LoginPopup from "./Login/LoginPopup";
 
 const Header: React.FC = () => {
-  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
 
   const handleAccountClick = () => {
     setPopupVisible(true);
@@ -35,10 +35,8 @@ const Header: React.FC = () => {
               <div className="account" onClick={handleAccountClick}>
                 <span className="ac-icon"></span>
               </div>
-              {isPopupVisible && (
-                <div className="modal-wrapper">
-                  <LoginPopup />
-                </div>
+              {popupVisible && (
+                <LoginPopup setPopupVisible={setPopupVisible} />
               )}
             </div>
           </div>

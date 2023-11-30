@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import postService from "../../services/postService";
+import postService from "@/services/postService";
 import "./styles/PostList.css";
 import Post from "./Post";
 

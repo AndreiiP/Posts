@@ -1,10 +1,25 @@
-import EmailLogo from "../assets/images/email.svg";
-import PasswordLogo from "../assets/images/lock.svg";
+import { useRef } from "react";
+import EmailLogo from "@/assets/images/email.svg";
+import PasswordLogo from "@/assets/images/lock.svg";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
-const LoginPopup: React.FC = () => {
+interface LoginPopupProps {
+  setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
+  const loginModalRef = useRef(null);
+
+  useOutsideClick(loginModalRef, () => {
+    setPopupVisible(false);
+  });
+
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="block-wrap text-center bg-white p-8 rounded-lg">
+      <div
+        ref={loginModalRef}
+        className="block-wrap text-center bg-white p-8 rounded-lg"
+      >
         <div className="login-wrap">
           <div className="login-email-block">
             <label className="login-label">Email address</label>
