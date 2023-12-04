@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
-import EmailLogo from "@/assets/images/email.svg";
-import PasswordLogo from "@/assets/images/lock.svg";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import authService from "@/services/authService";
+import ErrorPopup from "../ErrorPopup/ErrorPopup";
+import LoginForm from "./LoginForm";
+import StatusCodes from "http-status-codes";
 
 interface LoginPopupProps {
   setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,11 @@ interface LoginPopupProps {
 const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isErrorVisible, setIsErrorVisible] = useState(false);
+  const [hasEmailError, setEmailError] = useState<boolean>(false);
+  const [hasPasswordError, setPasswordError] = useState<boolean>(false);
+
+  const passwordLength = 2;
 
   const loginModalRef = useRef(null);
 
@@ -18,59 +24,67 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
     setPopupVisible(false);
   });
 
+  const handlePasswordChange = () => {
+    if (password.length >= passwordLength) {
+      setPasswordError(false);
+    }
+  };
+
+  const handleEmailChange = () => {
+    if (email.length >= 0) {
+      setEmailError(false);
+    }
+  };
+
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (!validateForm(email, password)) {
+      return;
+    }
+
     try {
       const response = await authService.login(email, password);
-      if (response === 200) {
+      if (response.status === StatusCodes.OK) {
         setPopupVisible(false);
       }
     } catch (error) {
-      console.error(error);
+      setIsErrorVisible(true);
     }
+  };
+
+  const validateForm = (email: string, password: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const isEmailValid = emailRegex.test(email);
+    const isPasswordValid = password ? password.length > passwordLength : false;
+
+    setEmailError(!isEmailValid);
+    setPasswordError(!isPasswordValid);
+
+    return isEmailValid && isPasswordValid;
   };
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div
-        ref={loginModalRef}
-        className="block-wrap text-center bg-white p-8 rounded-lg"
-      >
-        <form name="loginForm" onSubmit={handleLogin}>
-          <div className="login-wrap">
-            <div className="login-email-block">
-              <label className="login-label">Email address</label>
-              <div className="login-input-block">
-                <svg className="email-svg">
-                  <image href={EmailLogo} className="email-svg" />
-                </svg>
-                <input
-                  type="text"
-                  placeholder="Enter your email"
-                  className="input-text-email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="login-password-block">
-              <label className="login-label">Password</label>
-              <div className="login-input-block">
-                <svg className="password-svg">
-                  <image href={PasswordLogo} className="password-svg" />
-                </svg>
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="input-text-password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-            <button className="login-btn">Login</button>
-          </div>
-        </form>
+      <div className="block-wrap-main">
+        <div ref={loginModalRef} className="block-wrap">
+          {isErrorVisible && <ErrorPopup />}
+          <LoginForm
+            onSubmit={handleLogin}
+            onEmailChange={(value) => {
+              setEmail(value);
+              handleEmailChange();
+            }}
+            onPasswordChange={(value) => {
+              setPassword(value);
+              handlePasswordChange();
+            }}
+            hasEmailError={hasEmailError}
+            hasPasswordError={hasPasswordError}
+            passwordLength={passwordLength+1}
+          />
+        </div>
       </div>
     </div>
   );

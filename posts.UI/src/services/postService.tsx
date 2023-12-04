@@ -15,7 +15,6 @@ const postService = {
       const response = await axios.get(`${API_URL}/GetAll`);
       return response.data.data;
     } catch (error) {
-      console.error("Error fetching posts:", error);
       throw error;
     }
   },
@@ -24,7 +23,6 @@ const postService = {
       const response = await axios.get(`${API_URL}/${postId}`);
       return response.data.data;
     } catch (error) {
-      console.error("Error fetching posts:", error);
       throw error;
     }
   },

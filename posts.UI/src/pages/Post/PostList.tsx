@@ -16,7 +16,6 @@ const [posts, setPosts] = useState<PostData[]>([]);
     const fetchData = async () => {
       try {
         const postsData = await postService.getAllPosts();
-        console.log(postsData);
         setPosts(postsData);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -9,17 +9,30 @@
   box-shadow: rgba(52, 101, 127, 0.7) 0px 0px 6px;
 }
 
-.block-wrap {
-  width: 500px;
+.block-wrap-main {
+  margin: 0px auto;
+  max-width: 466px;
+  height: 450px;
+  position: relative;
+  text-align: center;
+  padding: 0px 24px;
 }
 
-.login-wrap {
+.block-wrap {
+  min-width: 420px;
+  max-width: 450px;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(53, 55, 60, 0.1) 0px 1px 5px;
+  border-radius: 8px;
   padding: 40px 40px 50px;
   text-align: left;
 }
 
 .login-label {
   margin-bottom: 8px;
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .input-text-email:focus-visible,
@@ -63,8 +76,6 @@
 
 .login-email-block,
 .login-password-block {
-  display: flex;
-  flex-direction: column;
   margin: 24px 0px;
 }
 

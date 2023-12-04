@@ -35,7 +35,9 @@ const Header: React.FC = () => {
               <div className="account" onClick={handleAccountClick}>
                 <span className="ac-icon"></span>
               </div>
-              {popupVisible && <LoginPopup setPopupVisible={setPopupVisible} />}
+              {popupVisible && (
+                <LoginPopup setPopupVisible={setPopupVisible} />
+              )}
             </div>
           </div>
         </div>
