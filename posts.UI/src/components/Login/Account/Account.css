@@ -1,0 +1,38 @@
+.header .main-header-row .right-buttons-block .account {
+  background: #fafafa;
+  border: 1px solid #fafafa;
+  text-decoration: none;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  margin-left: 16px;
+  padding: 12px;
+  transition: all 0.2s ease;
+  width: 40px;
+}
+
+.header .main-header-row .right-buttons-block .account .ac-icon-login {
+  background-image: url("/account_icon.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.header .main-header-row .right-buttons-block .account .ac-icon-logout {
+  background-image: url("../../assets/images/logout.svg");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.account:hover {
+  border: 1px solid rgb(52, 101, 127);
+  box-shadow: rgba(52, 101, 127, 0.7) 0px 0px 6px;
+}

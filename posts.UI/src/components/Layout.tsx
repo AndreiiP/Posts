@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./Header/Header.css";
 import "./Main/Main.css";
-import LoginPopup from "./Login/LoginPopup";
+import Account from "./Login/Account/Account";
 
-const Header: React.FC = () => {
-  const [popupVisible, setPopupVisible] = useState(false);
-
-  const handleAccountClick = () => {
-    setPopupVisible(true);
-  };
-
+const Layout: React.FC = () => {
   return (
     <>
       <header className="header">
@@ -21,9 +15,7 @@ const Header: React.FC = () => {
             </div>
             <div className="menu-desktop">
               <NavLink className="menu-item hover-animation" to="/post">
-                <div>
-                  <span>Posts</span>
-                </div>
+                <span>Posts</span>
               </NavLink>
               <NavLink className="menu-item hover-animation" to="/news">
                 <div>
@@ -31,14 +23,7 @@ const Header: React.FC = () => {
                 </div>
               </NavLink>
             </div>
-            <div className="right-buttons-block">
-              <div className="account" onClick={handleAccountClick}>
-                <span className="ac-icon"></span>
-              </div>
-              {popupVisible && (
-                <LoginPopup setPopupVisible={setPopupVisible} />
-              )}
-            </div>
+            <Account/>
           </div>
         </div>
       </header>
@@ -50,4 +35,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default Layout;

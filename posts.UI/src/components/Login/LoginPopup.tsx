@@ -6,10 +6,14 @@ import LoginForm from "./LoginForm";
 import StatusCodes from "http-status-codes";
 
 interface LoginPopupProps {
-  setPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setLoginPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAccountVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
+const LoginPopup: React.FC<LoginPopupProps> = ({
+  setLoginPopupVisible,
+  setIsAccountVisible,
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isErrorVisible, setIsErrorVisible] = useState(false);
@@ -21,7 +25,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
   const loginModalRef = useRef(null);
 
   useOutsideClick(loginModalRef, () => {
-    setPopupVisible(false);
+    setLoginPopupVisible(false);
   });
 
   const handlePasswordChange = () => {
@@ -46,7 +50,8 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
     try {
       const response = await authService.login(email, password);
       if (response.status === StatusCodes.OK) {
-        setPopupVisible(false);
+        setLoginPopupVisible(false);
+        setIsAccountVisible(false);
       }
     } catch (error) {
       setIsErrorVisible(true);
@@ -82,7 +87,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setPopupVisible }) => {
             }}
             hasEmailError={hasEmailError}
             hasPasswordError={hasPasswordError}
-            passwordLength={passwordLength+1}
+            passwordLength={passwordLength + 1}
           />
         </div>
       </div>

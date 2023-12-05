@@ -4,11 +4,6 @@
   margin: 0;
 }
 
-.account:hover {
-  border: 1px solid rgb(52, 101, 127);
-  box-shadow: rgba(52, 101, 127, 0.7) 0px 0px 6px;
-}
-
 .block-wrap-main {
   margin: 0px auto;
   max-width: 466px;
@@ -77,6 +72,10 @@
 .login-email-block,
 .login-password-block {
   margin: 24px 0px;
+}
+
+.logout-btn {
+  background: rgb(255, 207, 1);
 }
 
 .login-btn {

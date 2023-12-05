@@ -41,31 +41,8 @@
   text-decoration: none;
 }
 
-.header .main-header-row .right-buttons-block .account {
-  background: #fafafa;
-  border: 1px solid #fafafa;
-  text-decoration: none;
-  border-radius: 12px;
-  cursor: pointer;
-  display: inline-block;
-  height: 40px;
-  margin-left: 16px;
-  padding: 12px;
-  transition: all 0.2s ease;
-  width: 40px;
-}
-.header .main-header-row .right-buttons-block .account .ac-icon {
-  background-image: url("/account_icon.svg");
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: block;
-  height: 100%;
-  width: 100%;
-}
-
 .logo {
-  background-image: url("/vite.svg");
+  background-image: url("../../assets/images/mountain.svg");
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: contain;
