@@ -1,19 +1,112 @@
-.post-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh; 
-  max-width: 100%;
-  max-height: 80vh;
+.post-image-edit {
+  width: 400px;
+  border-radius: 12px;
+  height: 90%;
+
+  height: auto;
+  max-height: 540px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.post-image-edit {
-  max-width: 100%;
-  max-height: 100%;
+.post-title {
+  font-size: 24px;
+  font-weight: 700;
 }
 
-.post-info-edit {
-  text-align: center;
-  padding: 20px;
+.post-body {
+  max-width: 800px;
+  padding: 10px 0px 25px 0px;
+  font-size: 18px;
+  text-align: left;
+  margin: 0 auto;
+
+  overflow: hidden;
+}
+
+.post-container {
+  display: flex;
+  padding: 25px 0px 25px 0px;
+  margin: 0 auto;
+}
+
+.post-comment {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.add-comment-block {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  max-width: 800px;
+  border-radius: 10px;
+}
+
+.comment-block-label {
+  font-weight: 500;
+  float: left;
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+.post-date {
+  color: gray;
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.comment-name:focus-visible,
+.comment-message:focus-visible {
+  border: 1px solid rgb(52, 101, 127);
+  box-shadow: rgba(52, 101, 127, 0.7) 0px 0px 6px;
+}
+
+.comment-name,
+.comment-message {
+  background: rgb(255, 255, 255);
+  border-radius: 4px;
+  border: 1px solid rgb(147, 146, 150);
+  box-sizing: border-box;
+  color: rgb(74, 79, 84);
+  font-family: Roboto;
+  font-size: 16px;
+  outline: none;
+  width: 100%;
+  transition: border 0.15s linear 0s, box-shadow 0.3s linear 0s;
+  appearance: none;
+  height: 48px;
+  padding: 12px 16px 12px 48px;
+}
+
+.comment-btn {
+  background: rgb(255, 207, 1);
+  border: 1.5px solid transparent;
+  box-sizing: border-box;
+  color: rgb(0, 59, 77);
+  cursor: pointer;
+  font-family: IsidoraAltSemibold;
+  font-size: 16px;
+  margin: 24px 0px;
+  padding: 0px 32px;
+  height: 48px;
+  transition: color 0.2s ease-in-out 0s, background 0.1s ease-in-out 0s,
+    border 0.1s ease-in-out 0s, opacity 0.3s ease-in-out 0s;
+  display: block;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.comment-btn:focus {
+  outline: none;
+  box-shadow: rgba(52, 101, 127, 0.7) 0px 0px 6px;
+}
+
+.comment-btn:hover {
+  background: rgb(254, 216, 46);
 }

@@ -1,3 +1,4 @@
+import { useAuth } from "@/contexts/AuthContext";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import { useRef } from "react";
 
@@ -10,14 +11,15 @@ const LogoutPopup: React.FC<LoginPopupProps> = ({
   setLogoutPopupVisible,
   setIsAccountVisible,
 }) => {
+  const { logout } = useAuth();
   const logoutModalRef = useRef(null);
 
   useOutsideClick(logoutModalRef, () => {
     setLogoutPopupVisible(false);
   });
 
-  const Logout = () => {
-    localStorage.removeItem("token");
+  const Logout = async () => {
+    await logout();
 
     setLogoutPopupVisible(false);
     setIsAccountVisible(true);

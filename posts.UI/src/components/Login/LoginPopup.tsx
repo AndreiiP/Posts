@@ -1,9 +1,8 @@
 import { useRef, useState } from "react";
 import useOutsideClick from "@/hooks/useOutsideClick";
-import authService from "@/services/authService";
 import ErrorPopup from "../ErrorPopup/ErrorPopup";
 import LoginForm from "./LoginForm";
-import StatusCodes from "http-status-codes";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface LoginPopupProps {
   setLoginPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +22,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
   const passwordLength = 2;
 
   const loginModalRef = useRef(null);
+  const { login } = useAuth();
 
   useOutsideClick(loginModalRef, () => {
     setLoginPopupVisible(false);
@@ -48,11 +48,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({
     }
 
     try {
-      const response = await authService.login(email, password);
-      if (response.status === StatusCodes.OK) {
-        setLoginPopupVisible(false);
-        setIsAccountVisible(false);
-      }
+      await login(email, password);
+      setLoginPopupVisible(false);
+      setIsAccountVisible(false);
     } catch (error) {
       setIsErrorVisible(true);
     }

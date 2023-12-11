@@ -23,7 +23,7 @@
 }
 
 .header .main-header-row .right-buttons-block .account .ac-icon-logout {
-  background-image: url("../../assets/images/logout.svg");
+  background-image: url("/logout.svg");
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: contain;

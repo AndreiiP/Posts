@@ -6,11 +6,12 @@ import Post from "./Post";
 interface PostData {
   id: number;
   title: string;
+  body: string;
   commentCount: number;
 }
 
 const PostList: React.FC = () => {
-const [posts, setPosts] = useState<PostData[]>([]);
+  const [posts, setPosts] = useState<PostData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +19,7 @@ const [posts, setPosts] = useState<PostData[]>([]);
         const postsData = await postService.getAllPosts();
         setPosts(postsData);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        throw error;
       }
     };
 

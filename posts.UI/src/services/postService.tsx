@@ -6,11 +6,18 @@ interface PostData {
   id: number;
   title: string;
   body: string;
+  comments: object;
+}
+
+interface AllPostsData {
+  id: number;
+  title: string;
+  body: string;
   commentCount: number;
 }
 
 const postService = {
-  getAllPosts: async (): Promise<PostData[]> => {
+  getAllPosts: async (): Promise<AllPostsData[]> => {
     try {
       const response = await axios.get(`${API_URL}/GetAll`);
       return response.data.data;
