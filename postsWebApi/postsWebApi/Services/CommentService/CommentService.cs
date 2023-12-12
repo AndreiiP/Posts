@@ -17,6 +17,8 @@ namespace postsWebApi.Services.CommentService
 
         public async Task<ServiceResponse<GetCommentDto>> AddComment(int postId, AddCommentDto newComment, int userId)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
             var serviceResponse = new ServiceResponse<GetCommentDto>();
             var comment = _mapper.Map<Comment>(newComment);
 
@@ -28,6 +30,10 @@ namespace postsWebApi.Services.CommentService
             await _context.SaveChangesAsync();
 
             serviceResponse.Data = _mapper.Map<GetCommentDto>(comment);
+            if (user != null) 
+            {
+                serviceResponse.Data.UserName = user.Username;
+            }
 
             return serviceResponse;
         }

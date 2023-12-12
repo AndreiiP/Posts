@@ -5,7 +5,7 @@ using System.Security.Claims;
 namespace postsWebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/")]
     public class CommentController : ControllerBase
     {
         private readonly ICommentService _commentService;
@@ -16,7 +16,7 @@ namespace postsWebApi.Controllers
         }
 
         [Authorize]
-        [HttpPost("{postId}")]
+        [HttpPost("posts/{postId}/comments")]
         public async Task<ActionResult<ServiceResponse<List<GetCommentDto>>>> AddComment(int postId, AddCommentDto newComment) 
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

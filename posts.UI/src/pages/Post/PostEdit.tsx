@@ -5,6 +5,7 @@ import "./styles/PostEdit.css";
 import ViewPostComment from "@/components/Post/ViewPostComment";
 import AddPostComment from "@/components/Post/AddPostComment";
 import { useAuth } from "@/contexts/AuthContext";
+import commentService from "@/services/commentService";
 
 interface PostData {
   id: number;
@@ -14,9 +15,9 @@ interface PostData {
 }
 
 const PostEdit: React.FC = () => {
-  const { isAuthenticated, login, logout } = useAuth();
-
+  const { isAuthenticated } = useAuth();
   const { postId } = useParams<{ postId: string }>();
+
   const [post, setPost] = useState<PostData>({
     id: 0,
     title: "",
@@ -28,6 +29,8 @@ const PostEdit: React.FC = () => {
     const fetchData = async () => {
       try {
         const postData = await postService.getPostById(Number(postId));
+        console.log(postData);
+
         setPost(postData);
       } catch (error) {
         throw error;
@@ -37,9 +40,25 @@ const PostEdit: React.FC = () => {
     fetchData();
   }, [postId, isAuthenticated]);
 
-  const handleAddComment = (userName: string, message: string) => {
-    console.log(userName);
-    console.log(message);
+  const handleAddComment = async (message: string) => {
+    const commentData = await commentService.addComment(
+      Number(postId),
+      message
+    );
+
+    setPost((prevPost) => {
+      return {
+        ...prevPost,
+        comments: {
+          ...prevPost.comments,
+          [commentData.id]: {
+            message: commentData.message,
+            createdAt: commentData.createdAt,
+            userName: commentData.userName,
+          },
+        },
+      };
+    });
   };
 
   return (

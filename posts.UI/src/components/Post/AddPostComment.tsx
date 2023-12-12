@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 
 interface CommentFormProps {
-  onAddComment: (userName: string, message: string) => void;
+  onAddComment: (message: string) => void;
 }
 
 const AddPostComment: React.FC<CommentFormProps> = ({ onAddComment }) => {
-  const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleAddComment = (event: React.FormEvent) => {
+  const handleAddComment = async (event: React.FormEvent) => {
     event.preventDefault();
-    onAddComment(userName, message);
+    onAddComment(message);
   };
 
   return (
     <div className="add-comment-block mb-10 p-8 mt-8 bg-white shadow-2xl">
       <form onSubmit={handleAddComment}>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label className="comment-block-label">Name</label>
           <input
             type="text"
@@ -25,7 +24,7 @@ const AddPostComment: React.FC<CommentFormProps> = ({ onAddComment }) => {
               setUserName(e.target.value);
             }}
           />
-        </div>
+        </div> */}
         <label className="comment-block-label">Your comment</label>
         <textarea
           id="body"
